@@ -1,3 +1,7 @@
-## 0.0.1
+## 1.0.0
 
-- Added iPhone Duo active Reserved Region query, status injection, and lifecycle refresh capabilities.
+- Added active iPhone Duo reserved-region queries on supported iOS versions.
+- Added `TwIphoneDuoReservedRegionBridge` for lifecycle-aware refreshes.
+- Added `TwIphoneDuoReservedRegionProvider` for subtree access to logical-coordinate regions.
+- Added safe fallbacks for unsupported platforms, unavailable native capabilities, and invalid payloads.
+- Added package documentation, automated tests, and a runnable example application.

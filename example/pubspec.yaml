@@ -1,0 +1,22 @@
+name: tw_iphone_duo_reserved_region_example
+description: Demonstrates the tw_iphone_duo_reserved_region plugin.
+publish_to: none
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.10.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  tw_iphone_duo_reserved_region:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
