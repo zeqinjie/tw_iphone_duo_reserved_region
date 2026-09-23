@@ -1,0 +1,23 @@
+name: tw_iphone_duo_reserved_region
+description: Provides active iPhone Duo reserved regions to Flutter layouts.
+version: 1.0.0
+homepage: https://github.com/zeqinjie/tw_iphone_duo_reserved_region
+
+environment:
+  sdk: ">=3.10.0 <4.0.0"
+  flutter: ">=3.38.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  plugin:
+    platforms:
+      ios:
+        pluginClass: TwIphoneDuoReservedRegionPlugin
