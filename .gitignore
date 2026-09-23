@@ -25,7 +25,6 @@ doc/api/
 
 # Files and directories created when test or run example
 example/android/local.properties
-example/ios/
 example/.dart_tool/
 example/.packages
 
@@ -88,3 +87,7 @@ coverage/
 node_modules/
 package.json
 package-lock.json
+
+# Swift Package Manager
+.build/
+.swiftpm/

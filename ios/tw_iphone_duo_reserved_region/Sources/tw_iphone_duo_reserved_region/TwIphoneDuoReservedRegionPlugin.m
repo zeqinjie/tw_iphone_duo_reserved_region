@@ -1,4 +1,4 @@
-#import "TwIphoneDuoReservedRegionPlugin.h"
+#import "./include/tw_iphone_duo_reserved_region/TwIphoneDuoReservedRegionPlugin.h"
 
 /// MethodChannel used exclusively for iPhone Duo Reserved Region queries.
 static NSString *const TWIphoneDuoReservedRegionChannelName =
