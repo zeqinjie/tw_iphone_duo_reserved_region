@@ -10,7 +10,7 @@ Reserved Region 是视图坐标空间中被系统实体占用的区域。它有�
 
 ## SafeArea 与 Reserved Region 怎么选
 
-![SafeArea 与 Reserved Region 的区别](./iphone-duo-safe-area-vs-reserved-region.svg)
+![SafeArea 与 Reserved Region 的区别](./iphone-duo-safe-area-vs-reserved-region.png)
 
 | | `SafeArea` | Reserved Region |
 | --- | --- | --- |
@@ -84,7 +84,7 @@ if (renderObject is RenderBox && renderObject.hasSize) {
 }
 ```
 
-![检测遮挡并移动内容](./iphone-duo-occlusion-avoidance.svg)
+![检测遮挡并移动内容](./iphone-duo-occlusion-avoidance.png)
 
 `Rect` 描述的是局部遮挡，不等同于 `EdgeInsets`。给整条边统一增加 padding 可能浪费空间，也未必能准确避开遮挡。
 
