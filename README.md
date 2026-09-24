@@ -1,5 +1,7 @@
 # tw_iphone_duo_reserved_region
 
+English | [简体中文](README.zh-CN.md)
+
 A Flutter plugin that exposes active iPhone Duo reserved regions as rectangles
 in Flutter window logical coordinates. Use the reported geometry to keep
 important controls and content clear of system-owned occlusion regions.
@@ -22,14 +24,14 @@ iOS versions.
 
 ## Installation
 
-For a future pub.dev release:
+Add the published package from pub.dev:
 
 ```yaml
 dependencies:
   tw_iphone_duo_reserved_region: ^1.0.0
 ```
 
-Before publication, use a local checkout:
+For local development, use a checkout instead:
 
 ```yaml
 dependencies:
