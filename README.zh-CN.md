@@ -180,7 +180,7 @@ final List<Rect>? regions =
 - 插件不会在不支持的设备或平台上模拟 Reserved Region。
 
 更完整的数据流、生命周期和双包管理器结构请参阅
-[架构与使用说明](docs/architecture.zh-CN.md)。
+[iPhone Duo Reserved Region 插件使用指南](<docs/iPhone Duo Reserved Region.zh-CN.md>)。
 
 可运行示例位于 [`example/lib/main.dart`](example/lib/main.dart)，其中包含状态展示和
 窗口坐标遮挡区域覆盖层。

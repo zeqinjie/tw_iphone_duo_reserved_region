@@ -165,6 +165,10 @@ and also resolve to `null`, preserving the fallback layout path.
 - The plugin reports geometry; it does not reposition widgets automatically.
 - The package does not synthesize regions on unsupported devices or platforms.
 
+For a detailed discussion of when to use reserved regions, coordinate
+conversion, lifecycle updates, native integration, and verification, see
+[Using iPhone Duo Reserved Regions in Flutter](<docs/iPhone Duo Reserved Region.md>).
+
 See the runnable [example application](example/lib/main.dart) for status UI and
 a window-aligned region overlay.
 
