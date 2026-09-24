@@ -87,3 +87,7 @@ coverage/
 node_modules/
 package.json
 package-lock.json
+
+# Swift Package Manager
+.build/
+.swiftpm/

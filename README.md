@@ -43,6 +43,18 @@ Then resolve packages:
 flutter pub get
 ```
 
+## Native dependency management
+
+The iOS implementation supports both Swift Package Manager and CocoaPods.
+Flutter 3.44 and later use Swift Package Manager by default. Projects that
+still use CocoaPods can continue to integrate the same native implementation
+through the bundled podspec.
+
+The plugin requires Flutter 3.44 or later and an iOS deployment target of at
+least 15.5. Native compilation also requires Xcode 27.1 or later with the iOS
+27.1 SDK because the implementation references the reserved-region APIs at
+compile time.
+
 ## Usage
 
 Install `TwIphoneDuoReservedRegionBridge` above the part of the widget tree
@@ -146,7 +158,8 @@ and also resolve to `null`, preserving the fallback layout path.
 ## Limitations
 
 - The result describes the current Flutter view only.
-- Reserved-region availability depends on the installed iOS SDK and runtime.
+- Building requires Xcode 27.1 or later with the iOS 27.1 SDK; runtime results
+  remain available only on supported iOS versions and devices.
 - The plugin reports geometry; it does not reposition widgets automatically.
 - The package does not synthesize regions on unsupported devices or platforms.
 

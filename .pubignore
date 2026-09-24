@@ -8,10 +8,11 @@
 build/
 coverage/
 doc/api/
-docs/superpowers/
 example/.dart_tool/
 example/build/
 example/ios/Flutter/ephemeral/
 example/ios/Flutter/.last_build_id
 *.iml
 *.lock
+.build/
+.swiftpm/

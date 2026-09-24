@@ -10,6 +10,9 @@ flutter pub get
 flutter run
 ```
 
+The example can be generated and built with either Flutter's default Swift
+Package Manager integration or the CocoaPods compatibility path.
+
 On unsupported platforms or iOS versions, the screen shows the normal
 fallback state. On a supported runtime, active regions appear as translucent
 red rectangles while important content remains inside `SafeArea`.

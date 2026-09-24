@@ -5,3 +5,4 @@
 - Added `TwIphoneDuoReservedRegionProvider` for subtree access to logical-coordinate regions.
 - Added safe fallbacks for unsupported platforms, unavailable native capabilities, and invalid payloads.
 - Added package documentation, automated tests, and a runnable example application.
+- Added Swift Package Manager support while retaining CocoaPods compatibility.

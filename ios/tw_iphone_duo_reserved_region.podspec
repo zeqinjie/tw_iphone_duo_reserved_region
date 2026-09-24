@@ -9,7 +9,10 @@ Queries active iPhone Duo occlusion regions and exposes them to Flutter layouts.
   s.license          = { :type => 'MIT', :file => '../LICENSE' }
   s.author           = { 'zhengzeqin' => 'zeqinjie@qq.com' }
   s.source           = { :path => '.' }
-  s.source_files     = 'Classes/**/*'
+  s.source_files =
+    'tw_iphone_duo_reserved_region/Sources/tw_iphone_duo_reserved_region/**/*.{h,m}'
+  s.public_header_files =
+    'tw_iphone_duo_reserved_region/Sources/tw_iphone_duo_reserved_region/include/**/*.h'
   s.dependency 'Flutter'
   s.platform         = :ios, '15.5'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
