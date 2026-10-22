@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'tw_iphone_duo_reserved_region'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Provides active iPhone Duo reserved regions to Flutter.'
   s.description      = <<-DESC
 Queries active iPhone Duo occlusion regions and exposes them to Flutter layouts.

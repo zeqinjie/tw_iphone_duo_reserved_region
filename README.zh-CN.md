@@ -31,11 +31,11 @@ iOS 27.1 SDK。
 
 ## 安装
 
-从 pub.dev 添加已发布的 `1.0.0` 版本：
+从 pub.dev 添加依赖：
 
 ```yaml
 dependencies:
-  tw_iphone_duo_reserved_region: ^1.0.0
+  tw_iphone_duo_reserved_region: ^1.0.1
 ```
 
 也可以使用命令行：
