@@ -43,13 +43,14 @@ positions.
 | Dart | `>=3.10.0 <4.0.0` |
 | Flutter | 3.44 or later |
 | iOS deployment target | 15.5 or later |
-| Build environment | Xcode 27.1 or later with the iOS 27.1 SDK |
+| Build environment | Xcode supported by your Flutter version; older SDKs such as iOS 26.2 build the fallback path |
+| Reserved-region SDK | iOS 27.1 SDK or later to enable queries |
 | Reserved-region runtime | A supported device running iOS 27.1 or later |
 
 The minimum deployment target and API availability are separate requirements.
-An application can deploy to iOS 15.5, but it must be compiled with an SDK
-that declares the reserved-region API. On earlier runtimes, the native layer
-returns `null` after an availability check.
+An application can deploy to iOS 15.5. SDKs older than 27.1 exclude the new API
+references at compile time and return `null` on every runtime. With an iOS 27.1
+or later SDK, runtime availability checks return `null` on earlier iOS versions.
 
 ## Recommended integration
 
@@ -175,8 +176,9 @@ invalid array or rectangle data, or another unexpected exception, it calls
 remain on its fallback layout.
 
 The native layer returns a `FlutterError` with the
-`flutter_view_unavailable` code when the Flutter view is unavailable. Before
-iOS 27.1 it returns `nil`, which becomes `null` on the Dart side.
+`flutter_view_unavailable` code when queries are enabled but the Flutter view
+is unavailable. Builds with an SDK older than 27.1, or runs on iOS before 27.1,
+return `nil`, which becomes `null` on the Dart side.
 
 ## Swift Package Manager and CocoaPods
 
@@ -204,22 +206,27 @@ will use the same implementation.
 
 ## Verification strategy
 
-The plugin is verified at four levels:
+The verification strategy covers five levels:
 
 1. Dart unit tests cover data parsing, invalid-data fallback, and error
    reporting.
 2. Widget tests cover first-frame, lifecycle, and metrics refreshes as well as
-   stale-request rejection.
+   stale-request rejection and unavailable-native-capability fallback.
 3. Package-manager builds compile the same native implementation with Swift
    Package Manager and CocoaPods.
 4. Publication validation uses `dart pub publish --dry-run` to inspect archive
    contents and package metadata.
+5. Native compiler regression tests compile the real Objective-C implementation
+   with the installed SDK and overlays for SDK 15.5, 26.2, and 27.0 that forbid
+   new API references. These overlays do not replace builds with older Xcode.
 
 Common checks:
 
 ```console
 flutter analyze
 flutter test
+# On macOS, after flutter precache --ios:
+python3 -m unittest discover -s test/native -v
 dart pub publish --dry-run
 ```
 

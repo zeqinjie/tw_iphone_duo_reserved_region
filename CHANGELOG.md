@@ -1,3 +1,8 @@
+## Unreleased
+
+- Fixed native compilation with iOS SDKs older than 27.1 by excluding reserved-region API references at compile time. These builds return `null` even on newer iOS runtimes.
+- Added native SDK compilation regression tests, a bridge fallback test, and macOS CI coverage.
+
 ## 1.0.1
 
 - Expanded the English and Simplified Chinese documentation with detailed integration guides and diagrams comparing `SafeArea` with reserved regions and illustrating occlusion avoidance.

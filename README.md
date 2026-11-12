@@ -19,8 +19,8 @@ layout.
 | Other Flutter platforms | Returns `null` without invoking a platform channel. |
 
 The package deployment target is iOS 15.5. The reserved-region API is guarded
-at runtime, so the same application binary can still run on earlier supported
-iOS versions.
+at compile time and runtime. Builds with an iOS SDK older than 27.1 return
+`null` on every device, including devices running iOS 27.1 or later.
 
 ## Installation
 
@@ -53,9 +53,10 @@ still use CocoaPods can continue to integrate the same native implementation
 through the bundled podspec.
 
 The plugin requires Flutter 3.44 or later and an iOS deployment target of at
-least 15.5. Native compilation also requires Xcode 27.1 or later with the iOS
-27.1 SDK because the implementation references the reserved-region APIs at
-compile time.
+least 15.5. Older SDKs, including iOS SDK 26.2, compile the fallback path without
+referencing reserved-region APIs. Querying reserved regions requires building
+with Xcode 27.1 or later with the iOS 27.1 SDK, as well as a supported runtime
+and device. The Xcode version must also be supported by your Flutter version.
 
 ## Usage
 
@@ -160,8 +161,8 @@ and also resolve to `null`, preserving the fallback layout path.
 ## Limitations
 
 - The result describes the current Flutter view only.
-- Building requires Xcode 27.1 or later with the iOS 27.1 SDK; runtime results
-  remain available only on supported iOS versions and devices.
+- Reserved-region queries require building with the iOS 27.1 SDK or later and
+  running on a supported iOS version and device; older SDK builds return `null`.
 - The plugin reports geometry; it does not reposition widgets automatically.
 - The package does not synthesize regions on unsupported devices or platforms.
 

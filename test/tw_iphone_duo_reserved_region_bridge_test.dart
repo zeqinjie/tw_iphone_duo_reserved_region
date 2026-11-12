@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tw_iphone_duo_reserved_region/tw_iphone_duo_reserved_region.dart';
 
@@ -47,6 +48,52 @@ void main() {
     expect(callCount, 1);
     expect(latestRegions, const <Rect>[Rect.fromLTWH(320, 0, 80, 60)]);
   });
+
+  testWidgets(
+    'Bridge 在原生 SDK 能力不可用時維持回退佈局',
+    (tester) async {
+      const MethodChannel channel = MethodChannel(
+        'tw591/iphone_duo_reserved_regions',
+      );
+      addTearDown(() {
+        tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+          channel,
+          null,
+        );
+      });
+      int callCount = 0;
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(channel, (
+        MethodCall call,
+      ) async {
+        expect(call.method, 'getActiveOcclusionRegions');
+        callCount += 1;
+        return null;
+      });
+
+      await tester.pumpWidget(
+        TwIphoneDuoReservedRegionBridge(
+          child: Builder(
+            builder: (BuildContext context) {
+              final List<Rect>? regions =
+                  TwIphoneDuoReservedRegionProvider.activeOcclusionRegionsOf(
+                    context,
+                  );
+              return Text(
+                regions == null ? 'fallback' : 'available',
+                textDirection: TextDirection.ltr,
+              );
+            },
+          ),
+        ),
+      );
+      await tester.pump();
+
+      expect(callCount, 1);
+      expect(find.text('fallback'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.iOS),
+  );
 
   testWidgets('Bridge 在 App 恢復前台時重新查詢', (tester) async {
     int callCount = 0;

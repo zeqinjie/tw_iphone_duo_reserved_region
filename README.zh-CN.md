@@ -16,18 +16,18 @@
 | 较早的 iOS 版本 | 返回 `null`，应用继续使用普通回退布局。 |
 | 其他 Flutter 平台 | 不调用平台通道，直接返回 `null`。 |
 
-插件的最低部署版本为 iOS 15.5。Reserved Region API 使用运行时可用性检查，因此同一份
-应用二进制仍可运行在插件支持的较早 iOS 版本上。
+插件的最低部署版本为 iOS 15.5。Reserved Region API 同时使用编译期和运行时保护。
+使用低于 27.1 的 iOS SDK 构建时，所有设备均返回 `null`，包括运行 iOS 27.1 及以上的设备。
 
 ## 环境要求
 
 - Dart `>=3.10.0 <4.0.0`
 - Flutter 3.44 或更高版本
 - iOS Deployment Target 15.5 或更高版本
-- Xcode 27.1 或更高版本，并包含 iOS 27.1 SDK
+- 使用当前 Flutter 版本支持的 Xcode；iOS SDK 26.2 等较早 SDK 可编译回退实现
 
-即使应用需要兼容较早的 iOS 运行时，编译阶段仍必须使用包含 Reserved Region API 声明的
-iOS 27.1 SDK。
+要实际查询 Reserved Region，仍需使用 Xcode 27.1 或更高版本及 iOS 27.1 SDK 构建，
+并运行在支持该能力的系统和设备上。
 
 ## 安装
 

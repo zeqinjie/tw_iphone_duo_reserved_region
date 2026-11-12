@@ -91,3 +91,6 @@ package-lock.json
 # Swift Package Manager
 .build/
 .swiftpm/
+
+# Python native compatibility tests
+__pycache__/

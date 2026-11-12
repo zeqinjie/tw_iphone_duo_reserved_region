@@ -61,6 +61,9 @@ static NSString *const TWIphoneDuoReservedRegionMethodName =
 
 /// Serializes currently active occlusion regions in Flutter view coordinates.
 - (id)activeOcclusionRegionPayload {
+  // Runtime availability cannot hide declarations missing from an older SDK.
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && \
+    __IPHONE_OS_VERSION_MAX_ALLOWED >= 270100
   if (@available(iOS 27.1, *)) {
     UIView *flutterView = self.registrar.viewController.view;
     if (flutterView == nil) {
@@ -86,6 +89,7 @@ static NSString *const TWIphoneDuoReservedRegionMethodName =
     }
     return payload;
   }
+#endif
   return nil;
 }
 

@@ -29,11 +29,13 @@ Reserved Region 是视图坐标空间中被系统实体占用的区域。它有�
 | Dart | `>=3.10.0 <4.0.0` |
 | Flutter | 3.44 或更高版本 |
 | iOS Deployment Target | 15.5 或更高版本 |
-| 编译环境 | Xcode 27.1 或更高版本，包含 iOS 27.1 SDK |
+| 编译环境 | 当前 Flutter 支持的 Xcode；iOS SDK 26.2 等较早 SDK 可编译回退实现 |
+| Reserved Region SDK | 启用查询需要 iOS 27.1 SDK 或更高版本 |
 | Reserved Region 运行时 | iOS 27.1 或更高版本的受支持设备 |
 
-最低部署版本与 API 可用版本是两个不同概念。应用可以部署到 iOS 15.5，但编译必须使用
-声明了 Reserved Region API 的 SDK；在较早运行时上，原生层通过可用性检查返回 `null`。
+最低部署版本与 API 可用版本是两个不同概念。应用可以部署到 iOS 15.5。
+低于 27.1 的 SDK 会在编译期排除新 API，构建产物在所有系统上均返回 `null`。
+使用 iOS 27.1 及以上 SDK 时，较早运行时仍通过可用性检查返回 `null`。
 
 ## 推荐接入方式
 
@@ -139,8 +141,8 @@ Reserved Region 可能随窗口尺寸、设备状态或应用生命周期变化�
 
 Channel 遇到 `MissingPluginException`、`PlatformException`、无效数组或矩形数据，以及其他未预期异常时，会调用 `FlutterError.reportError` 并返回 `null`。上层因此可以保持回退布局。
 
-原生层在 Flutter View 不可用时返回带有 `flutter_view_unavailable` 错误码的
-`FlutterError`；在 iOS 27.1 之前则返回 `nil`，对应 Dart 层的 `null`。
+原生层在已启用查询但 Flutter View 不可用时返回带有 `flutter_view_unavailable` 错误码的
+`FlutterError`；使用低于 27.1 的 SDK 构建或运行在 iOS 27.1 之前时，返回 `nil`，对应 Dart 层的 `null`。
 
 ## Swift Package Manager 与 CocoaPods
 
@@ -166,18 +168,21 @@ podspec 则将 `source_files` 和 `public_header_files` 指向相同的 `Sources
 
 ## 验证策略
 
-插件的验证重点分为四层：
+插件的验证重点分为五层：
 
 1. Dart 单元测试：验证数据解析、无效数据回退和错误报告。
-2. Widget 测试：验证 Bridge 的首帧刷新、生命周期刷新、metrics 刷新和过期请求丢弃。
+2. Widget 测试：验证 Bridge 的首帧刷新、生命周期刷新、metrics 刷新、过期请求丢弃和原生能力不可用时的回退布局。
 3. 包管理器构建：分别通过 Swift Package Manager 与 CocoaPods 编译同一原生实现。
 4. 发布校验：使用 `dart pub publish --dry-run` 检查归档内容和包元数据。
+5. 原生编译回归测试：编译真实 Objective-C 实现，并通过 SDK 15.5、26.2、27.0 的覆盖头文件禁止引用新 API；该模拟检查不能替代旧版 Xcode 的真实构建。
 
 常用检查命令：
 
 ```console
 flutter analyze
 flutter test
+# macOS 上先执行 flutter precache --ios：
+python3 -m unittest discover -s test/native -v
 dart pub publish --dry-run
 ```
 
