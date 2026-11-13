@@ -28,7 +28,7 @@ Add the published package from pub.dev:
 
 ```yaml
 dependencies:
-  tw_iphone_duo_reserved_region: ^1.0.1
+  tw_iphone_duo_reserved_region: ^1.0.2
 ```
 
 For local development, use a checkout instead:

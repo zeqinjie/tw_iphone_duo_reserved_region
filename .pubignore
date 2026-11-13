@@ -16,3 +16,5 @@ example/ios/Flutter/.last_build_id
 *.lock
 .build/
 .swiftpm/
+__pycache__/
+*.pyc

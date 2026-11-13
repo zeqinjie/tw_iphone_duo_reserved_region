@@ -35,7 +35,7 @@
 
 ```yaml
 dependencies:
-  tw_iphone_duo_reserved_region: ^1.0.1
+  tw_iphone_duo_reserved_region: ^1.0.2
 ```
 
 也可以使用命令行：
